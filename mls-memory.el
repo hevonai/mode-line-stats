@@ -102,9 +102,11 @@
 
 (defun mls-memory-update ()
   "Update stats."
-  (setq mls-memory-mode-line-string (mls-memory-stats))
-  (force-mode-line-update)
-  (sit-for 0))
+  (if (file-directory-p default-directory)
+      (progn
+        (setq mls-memory-mode-line-string (mls-memory-stats))
+        (force-mode-line-update)
+        (sit-for 0))))
 
 (defun mls-memory-start ()
   "Start displaying memory usage stats in the mode-line."

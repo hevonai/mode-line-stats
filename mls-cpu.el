@@ -90,9 +90,11 @@
 
 (defun mls-cpu-update ()
   "Update stats."
-  (setq mls-cpu-mode-line-string (mls-cpu-stats))
-  (force-mode-line-update)
-  (sit-for 0))
+  (if (file-directory-p default-directory)
+      (progn
+        (setq mls-cpu-mode-line-string (mls-cpu-stats))
+        (force-mode-line-update)
+        (sit-for 0))))
 
 (defun mls-cpu-start ()
   "Start displaying CPU usage stats in the mode-line."
